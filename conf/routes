@@ -1,0 +1,12 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET			/							controllers.Assets.at(path="/public", file="index.html")
+GET			/gmailNotifier.html		controllers.Assets.at(path="/public", file="gmailNotifier.html")
+GET			/notification			controllers.Application.getNotified()
+
+# Map static resources from the /public folder to the /assets URL path
+GET			/*file						controllers.Assets.at(path="/public", file)
+#GET			/assets/*file			controllers.Assets.at(path="/public", file)
