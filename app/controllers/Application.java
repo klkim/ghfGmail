@@ -20,6 +20,6 @@ public class Application extends Controller {
 			System.out.println("connected... " + _instance);
 		}		
 		_instance++;
-		return ok("");
+		return ok(Integer.toString(_instance));
 	}
 }

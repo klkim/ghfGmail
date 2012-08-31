@@ -1,0 +1,9 @@
+edit Profile
+
+git init
+git add .
+git commit -m "init"
+
+heroku create --stack cedar helloghf
+
+git push heroku master
