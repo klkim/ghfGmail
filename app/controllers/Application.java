@@ -12,10 +12,13 @@ public class Application extends Controller {
 		return ok("");
 	}
 
-	public static Result getNotified() {		
+	public static Result getNotified(String channel) {
+		System.out.println("channel: " + channel);
+		
 		if (0 == _instance) {			
-			System.out.println("server started...");			
-			new Main().start();
+			System.out.println("server started...");
+			
+			new Main(channel, "notification").start();
 		} else {
 			System.out.println("connected... " + _instance);
 		}		

@@ -25,7 +25,10 @@ public class Main extends Thread {
 		providerManager.addIQProvider("new-mail", "google:mail:notify", NewMail.class);		
 	}	
 	
-	PusherRequest pusher = new PusherRequest("gmail-channel","notification");
+	PusherRequest pusher;
+	public Main(String channel, String event) {
+		pusher = new PusherRequest(channel, event);
+	}
 	
 	@Override
 	public void run() {
@@ -36,15 +39,14 @@ public class Main extends Thread {
 
 		try {
 			conn.connect();
-			conn.login(Credential.ID, Credential.PW);
-			ServiceDiscoveryManager discoManager = ServiceDiscoveryManager
-					.getInstanceFor(conn);
+			conn.login(Credential.ID, Credential.PW);			
+			ServiceDiscoveryManager discoManager = ServiceDiscoveryManager.getInstanceFor(conn);
 			discoInfo = discoManager.discoverInfo("gmail.com");
 		} catch (XMPPException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(discoInfo.toXML());
+//		System.out.println(discoInfo.toXML());
 
 		conn.addPacketListener(new PacketListener() {
 			@Override
@@ -56,7 +58,7 @@ public class Main extends Thread {
 				System.out.println("YOU'VE GOT THE MAIL!");
 				System.out.println(new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(new Date().getTime()));
 				System.out.println("----------------------");
-				System.out.println(packet.toXML());
+//				System.out.println(packet.toXML());
 
 				IQ iq = new IQ() {
 					public String getChildElementXML() {
@@ -88,8 +90,7 @@ public class Main extends Thread {
 		iq1.setType(IQ.Type.GET);
 		// System.out.println(iq1.toXML());
 		conn.sendPacket(iq1);
-
-		while (true) {}
+		
 		// conn.disconnect();
 	}
 }
