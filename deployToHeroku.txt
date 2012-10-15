@@ -1,4 +1,4 @@
-edit Profile
+edit Procfile
 
 git init
 git add .
